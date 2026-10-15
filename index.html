@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Navaratri | Grand Welcome</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, serif;
+    background: #090704;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* VIDEO INTRO */
+#intro {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1.5s ease;
+}
+
+#intro video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#skip {
+    position: absolute;
+    right: 22px;
+    bottom: 25px;
+    padding: 12px 24px;
+    border: 1px solid #f6d58b;
+    background: rgba(0,0,0,.55);
+    color: #ffe5a1;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+/* ENTRANCE SCREEN */
+#entrance {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse at center, #54200e 0%, #200c08 48%, #050302 100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 2s ease;
+}
+
+#entrance.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #ff9d16;
+    filter: blur(120px);
+    opacity: .22;
+    animation: pulse 3s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(.8); opacity: .12; }
+    to { transform: scale(1.3); opacity: .35; }
+}
+
+.eyebrow {
+    color: #ffdc91;
+    font-size: 12px;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+    animation: rise 1.5s both;
+}
+
+h1 {
+    color: #ffdf98;
+    font-size: clamp(38px, 8vw, 85px);
+    font-weight: normal;
+    letter-spacing: 5px;
+    text-shadow: 0 0 35px #ff8c23;
+    animation: rise 2s both;
+}
+
+.subtitle {
+    margin-top: 20px;
+    color: #ffe8ca;
+    letter-spacing: 3px;
+    font-size: 14px;
+    animation: rise 2.5s both;
+}
+
+/* CENTRAL TRADITIONAL LAMP */
+.lamp {
+    position: relative;
+    margin: 38px 0;
+    font-size: 100px;
+    animation: lampGlow 2s infinite alternate;
+    filter: drop-shadow(0 0 25px #ff9d22);
+}
+
+@keyframes lampGlow {
+    from { transform: scale(.95); filter: drop-shadow(0 0 12px #ff8b18); }
+    to { transform: scale(1.08); filter: drop-shadow(0 0 35px #ffb52e); }
+}
+
+/* ELEPHANTS */
+.elephants {
+    position: absolute;
+    top: 48%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+    font-size: clamp(45px, 9vw, 100px);
+    pointer-events: none;
+}
+
+.elephant-left {
+    animation: leftElephant 2.5s ease-out both;
+}
+
+.elephant-right {
+    animation: rightElephant 2.5s ease-out both;
+}
+
+@keyframes leftElephant {
+    from { transform: translateX(-180%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes rightElephant {
+    from { transform: translateX(180%) scaleX(-1); }
+    to { transform: translateX(0) scaleX(-1); }
+}
+
+.enter-btn {
+    position: relative;
+    z-index: 2;
+    margin-top: 10px;
+    padding: 17px 38px;
+    border: 1px solid #ffda86;
+    background: linear-gradient(135deg, #ffd78a, #b86a20);
+    color: #321204;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    cursor: pointer;
+    box-shadow: 0 0 25px #e78a2d55;
+    transition: .4s;
+    animation: rise 3s both;
+}
+
+.enter-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 40px #ffbd59;
+}
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+    color: #cda66a;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+@keyframes rise {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* MAIN WEBSITE */
+#main {
+    position: fixed;
+    inset: 0;
+    overflow-y: auto;
+    display: none;
+    text-align: center;
+    background: linear-gradient(#260d08, #080503);
+    padding: 100px 20px;
+}
+
+#main h2 {
+    color: #ffda91;
+    font-size: clamp(30px, 6vw, 60px);
+    margin-bottom: 25px;
+}
+
+#main p {
+    line-height: 2;
+    color: #f5dfc2;
+    font-size: 17px;
+}
+
+@media (max-width: 600px) {
+    .elephants {
+        top: 35%;
+        padding: 0 3%;
+    }
+
+    .lamp {
+        margin: 28px 0;
+        font-size: 85px;
+    }
+
+    .subtitle {
+        font-size: 11px;
+        padding: 0 15px;
+    }
+
+    .eyebrow {
+        letter-spacing: 3px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- OPENING VIDEO -->
+<div id="intro">
+    <video id="introVideo"
+           autoplay
+           muted
+           playsinline
+           preload="auto">
+        <source src="./enter.mp4" type="video/mp4">
+        Your browser does not support video playback.
+    </video>
+
+    <button id="skip" onclick="showEntrance()">SKIP INTRO ⟶</button>
+</div>
+
+<!-- GRAND ENTRANCE -->
+<section id="entrance">
+
+    <div class="glow"></div>
+
+    <div class="elephants">
+        <span class="elephant-left">🐘</span>
+        <span class="elephant-right">🐘</span>
+    </div>
+
+    <div class="eyebrow">🙏 WELCOME TO OUR CELEBRATION 🙏</div>
+
+    <h1>NAVARATRI</h1>
+
+    <div class="subtitle">
+        A CELEBRATION OF DIVINE LIGHT & TRADITION
+    </div>
+
+    <div class="lamp">🪔</div>
+
+    <button class="enter-btn" onclick="enterWebsite()">
+        ENTER WEBSITE &nbsp; ✨
+    </button>
+
+    <div class="footer">
+        TRADITION • DEVOTION • CULTURE
+    </div>
+
+</section>
+
+<!-- MAIN WEBSITE -->
+<main id="main">
+    <h2>🌺 Welcome to Navaratri 🌺</h2>
+
+    <p>
+        Celebrate the beauty of Indian tradition,<br>
+        the power of devotion, and the light of culture.
+    </p>
+
+    <div style="font-size:75px; margin-top:40px;">🪔 🌺 🙏 🌺 🪔</div>
+</main>
+
+<script>
+const video = document.getElementById("introVideo");
+const intro = document.getElementById("intro");
+const entrance = document.getElementById("entrance");
+
+let entranceOpened = false;
+
+function showEntrance() {
+    if (entranceOpened) return;
+
+    entranceOpened = true;
+
+    video.pause();
+
+    intro.style.opacity = "0";
+
+    setTimeout(() => {
+        intro.style.display = "none";
+        entrance.classList.add("show");
+    }, 1000);
+}
+
+video.addEventListener("ended", showEntrance);
+
+/* If the video cannot play, show the entrance instead */
+video.addEventListener("error", () => {
+    showEntrance();
+});
+
+/* Allow visitors to enter the main website */
+function enterWebsite() {
+    entrance.style.opacity = "0";
+
+    setTimeout(() => {
+        entrance.style.display = "none";
+        document.getElementById("main").style.display = "block";
+        document.body.style.overflow = "auto";
+    }, 1000);
+}
+
+/* Start playback when possible */
+video.play().catch(() => {
+    // Some browsers require user interaction to start playback.
+});
+</script>
+
+</body>
+</html>
